@@ -41,7 +41,7 @@ LEARN_HUB_TEMPLATE_V1.0/
 
 1.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/m-92-h/learn-hub.git
+    git clone https://github.com/m-92-h/Learn-Hub
     ```
 2.  **Open in Browser**:
     Simply open `index.html` in your favorite web browser.
