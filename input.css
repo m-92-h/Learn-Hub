@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Primary colors */
+    --color-primary-DEFAULT: var(--color-primary-blueipnnpo-500);
+    --color-primary-light: var(--color-blue-400);
+    --color-primary-lighter: var(--color-blue-400);
+    --color-primary-dark: var(--color-blue-600);
+    --color-primary-darker: var(--color-blue-700);
+
+    /* Text colors */
+    --color-text-DEFAULT: var(--color-white);
+    --color-text-primary: var(--color-gray-800);
+    --color-text-secondary: var(--color-gray-600);
+    --color-text-light: var(--color-gray-500);
+    --color-text-lighter: var(--color-gray-400);
+    --color-text-dark: var(--color-gray-50);
+    --color-text-darker: var(--color-gray-50);
+
+    /* Background colors */
+    --color-background-DEFAULT: var(--color-white);
+    --color-background-light: var(--color-gray-50);
+    --color-background-lighter: var(--color-gray-50);
+    --color-background-dark: var(--color-gray-900);
+    --color-background-darker: var(--color-slate-900);
+
+    /* Border colors */
+    --color-border-DEFAULT: var(--color-gray-300);
+    --color-border-light: var(--color-gray-200);
+    --color-border-lighter: var(--color-gray-200);
+    --color-border-dark: var(--color-gray-500);
+    --color-border-darker: var(--color-gray-700);
+
+    /* Accent colors */
+    --color-accent-blue: var(--color-blue-500);
+    --color-accent-indigo: var(--color-indigo-500);
+    --color-accent-purple: var(--color-purple-400);
+    --color-accent-pink: var(--color-pink-500);
+    --color-accent-red: var(--color-red-500);
+    --color-accent-orange: var(--color-amber-500);
+    --color-accent-yellow: var(--color-yellow-500);
+    --color-accent-green: var(--color-emerald-500);
+    --color-accent-teal: var(--color-teal-500);
+    --color-accent-cyan: var(--color-cyan-500);
+
+    /* Status colors */
+    --color-status-success: var(--color-emerald-500);
+    --color-status-warning: var(--color-amber-500);
+    --color-status-error: var(--color-red-500);
+    --color-status-info: var(--color-blue-500);
+
+    /* Gradients */
+    --color-from-blue: var(--color-blue-500);
+    --color-to-blue: var(--color-blue-600);
+    --color-from-indigo: var(--color-indigo-500);
+    --color-to-indigo: var(--color-indigo-600);
+}

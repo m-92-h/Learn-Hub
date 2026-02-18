@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LearnHub - Educational Dashboard</title>
+        <meta name="description" content="Professional documentation and learning dashboard template" />
+        <link rel="stylesheet" href="../output.css" />
+        <link rel="stylesheet" href="../styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    </head>
+    <body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-border-light min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 bg-text-DEFAULT dark:bg-gray-800 shadow-md z-50">
+            <div class="lg:mx-5 px-2 lg:px-4 py-1.5 lg:py-3 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden" id="mobileMenuBtn"><i class="fa-solid fa-bars text-black dark:text-white"></i></button>
+                    <a href="../index.html" class="text-2xl font-bold"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-background-dark dark:text-text-DEFAULT">Hub</span></a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="text-black dark:text-white hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Home</a>
+                    <a href="./doc.html" class="text-black dark:text-white hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Documentation</a>
+                    <div class="relative">
+                        <button class="dropdown-btn text-black dark:text-white hover:text-primary-dark dark:hover:text-primary-light transition-colors cursor-pointer font-medium">Courses</button>
+                        <div class="dropdown-menu absolute left-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-10">
+                            <a href="#dataScienceCourses" class="section-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Data Science</a>
+                            <a href="#cybersecurityCourses" class="section-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Cybersecurity</a>
+                            <a href="#cloudComputingCourses" class="section-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Cloud Computing</a>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <button class="dropdown-btn text-black dark:text-white hover:text-primary-dark dark:hover:text-primary-light transition-colors cursor-pointer font-medium">Quizzes</button>
+                        <div class="dropdown-menu absolute left-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-10">
+                            <a href="#dataScienceQuiz" class="quiz-nav-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Data Science Quiz</a>
+                            <a href="#cybersecurityQuiz" class="quiz-nav-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Cybersecurity Quiz</a>
+                            <a href="#cloudComputingQuiz" class="quiz-nav-link block px-4 py-2 text-gray-800 dark:text-gray-100 hover:text-blue-900 hover:bg-gray-100 text-sm">Cloud Computing Quiz</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Right Side Icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Icon -->
+                    <div class="flex items-center rounded-full bg-text-DEFAULT dark:bg-text-darker pl-3 outline-1 -outline-offset-1 outline-border-DEFAULT has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-to-indigo">
+                        <input type="text" name="price" placeholder="Search..." class="block w-20 md:w-32 lg:w-40 py-1 md:py-1.5 pr-1.5 lg:pr-3 pl-1 text-base text-background-dark placeholder:text-gray-800 focus:outline-none sm:text-sm/6" />
+                        <div class="pe-3">
+                            <i class="fa-solid fa-magnifying-glass" style="color: rgb(90, 90, 90)"></i>
+                        </div>
+                    </div>
+
+                    <!-- User / Sign In-->
+                    <button
+                        id="open-sign-in-modal-desktop"
+                        class="hidden md:flex bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-semibold py-2.5 px-6 rounded-full transition-all duration-300 text-sm shadow-sm hover:shadow cursor-pointer"
+                    >
+                        Sign In
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <!-- Offcanvas Overlay -->
+                <div id="offcanvasOverlay" class="offcanvas-overlay"></div>
+
+                <!-- Offcanvas Menu -->
+                <div id="offcanvasMenu" class="offcanvas-menu md:hidden bg-linear-to-br from-background-light to-blue-50 dark:from-background-dark dark:to-gray-800 text-gray-800 dark:text-gray-100">
+                    <div class="offcanvas-header flex items-center justify-between">
+                        <a href="../index.html" class="text-2xl font-bold"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-background-dark dark:text-text-DEFAULT">Hub</span></a>
+                        <button id="closeOffcanvas">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="flex flex-col gap-5">
+                            <a href="../index.html" class="link text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Home</a>
+                            <a href="./doc.html" class="link text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Documentation</a>
+                        </div>
+
+                        <div class="offcanvas-item mt-2">
+                            <button class="offcanvas-submenu-toggle flex justify-between w-full" data-submenu="dataScience-submenu">
+                                <span class="text-gray-800 dark:text-border-DEFAULT font-medium">Data Science</span>
+                            </button>
+                            <ul id="dataScience-submenu" class="offcanvas-submenu"></ul>
+                        </div>
+                        <div class="offcanvas-item mt-2">
+                            <button class="offcanvas-submenu-toggle flex justify-between w-full" data-submenu="cybersecurity-submenu">
+                                <span class="text-gray-800 dark:text-border-DEFAULT font-medium">Cybersecurity</span>
+                            </button>
+                            <ul id="cybersecurity-submenu" class="offcanvas-submenu"></ul>
+                        </div>
+                        <div class="offcanvas-item mt-2">
+                            <button class="offcanvas-submenu-toggle flex justify-between w-full" data-submenu="cloudComputing-submenu">
+                                <span class="text-gray-800 dark:text-border-DEFAULT font-medium">Cloud Computing</span>
+                            </button>
+                            <ul id="cloudComputing-submenu" class="offcanvas-submenu"></ul>
+                        </div>
+                        <div class="offcanvas-item mt-2">
+                            <button class="offcanvas-submenu-toggle flex justify-between w-full" data-submenu="quizzes-submenu">
+                                <span class="text-gray-800 dark:text-border-DEFAULT font-medium">Quizzes</span>
+                            </button>
+                            <ul id="quizzes-submenu" class="offcanvas-submenu">
+                                <li>
+                                    <a class="quiz-nav-link" href="#dataScienceQuiz"><span class="text-red-500 font-bold mr-2">Quiz:</span><span class="text-green-600">Data Science</span></a>
+                                </li>
+                                <li>
+                                    <a class="quiz-nav-link" href="#cybersecurityQuiz"><span class="text-red-500 font-bold mr-2">Quiz:</span><span class="text-red-600">Cybersecurity</span></a>
+                                </li>
+                                <li>
+                                    <a class="quiz-nav-link" href="#cloudComputingQuiz"><span class="text-red-500 font-bold mr-2">Quiz:</span><span class="text-cyan-600">Cloud Computing</span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Login and Sign Up -->
+                        <div class="text-center mt-5">
+                            <button id="open-sign-in-modal-mobile" class="bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-semibold py-2 w-full rounded-full transition-all duration-300 text-sm shadow-sm hover:shadow">Sign In</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex min-h-screen pt-24 bg-background-light dark:bg-background-dark">
+            <!-- Sidebar -->
+            <aside class="hidden md:block w-64 bg-text-DEFAULT dark:bg-gray-800 shadow-lg rounded-lg m-6 p-4 h-fit sticky top-28 overflow-auto max-h-screen" data-aos="zoom-in" data-aos-duration="1000">
+                <nav class="space-y-2" id="sidebar-nav">
+                    <!-- Topics will be dynamically generated by JavaScript -->
+                    <div class="text-center py-4 text-gray-600 dark:text-gray-400 hover:text-primary-dark dark:hover:text-primary-light transition-colors" id="loading-indicator">Loading content...</div>
+                </nav>
+            </aside>
+            <section class="flex-1 p-6 max-w-4xl mx-auto w-full" data-aos="zoom-in" data-aos-duration="1000">
+                <!-- Main Content Area -->
+                <div class="content-area bg-text-DEFAULT dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+                    <!-- Main Title -->
+                    <h1 class="text-3xl font-bold text-background-dark dark:text-text-DEFAULT mb-6">
+                        <span class="text-primary-dark dark:text-accent-blue">Loading...</span>
+                    </h1>
+
+                    <!-- Topic Title -->
+                    <h2 class="text-2xl font-semibold text-gray-800 dark:text-border-light mb-6 border-b pb-2">Loading content...</h2>
+
+                    <!-- Content -->
+                    <div class="prose dark:prose-invert max-w-none mb-8">
+                        <p class="text-border-darker dark:text-border-DEFAULT mb-4 leading-relaxed">Please wait while we load the content...</p>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div class="bg-gray-100 dark:bg-border-darker rounded-lg p-4 mb-8 flex items-center justify-center min-h-48">
+                        <div class="text-center">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-dark mx-auto mb-3"></div>
+                            <p class="text-background-light0 dark:text-gray-400">Loading content...</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between pt-6 border-t border-border-light dark:border-border-darker">
+                        <button
+                            id="prev-topic"
+                            class="flex items-center px-5 py-2.5 border border-blue-200 dark:border-blue-800 rounded-lg bg-text-DEFAULT dark:bg-gray-800 text-primary-dark dark:text-primary-light hover:bg-blue-50 dark:hover:bg-border-darker transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            disabled
+                        >
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            <span>Previous Topic</span>
+                        </button>
+                        <button
+                            id="next-topic"
+                            class="flex items-center px-5 py-2.5 border border-blue-200 dark:border-blue-800 rounded-lg bg-text-DEFAULT dark:bg-gray-800 text-primary-dark dark:text-primary-light hover:bg-blue-50 dark:hover:bg-border-darker transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            disabled
+                        >
+                            <span>Next Topic</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-linear-to-b from-gray-800 to-background-dark text-border-light pt-16 pb-8">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <!-- Logo and Description -->
+                    <div class="col-span-1">
+                        <div class="text-2xl font-bold cursor-default"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-text-DEFAULT dark:text-text-DEFAULT">Hub</span></div>
+                        <p class="text-text-lighter mb-4">Your gateway to mastering in-demand tech skills through expert-led courses and hands-on learning.</p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="../index.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-home mr-2"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="./doc.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-book mr-2"></i>Documentation</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Customer Support -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Support & Resources</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="./about.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fa-regular fa-address-card mr-2"></i>About</a>
+                            </li>
+                            <li>
+                                <a href="./contact.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fa-solid fa-file-signature mr-2"></i>Contact</a>
+                            </li>
+                            <li>
+                                <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-question-circle mr-2"></i>Help Center</a>
+                            </li>
+                            <li>
+                                <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-comments mr-2"></i>24/7 Live Chat</a>
+                            </li>
+                            <li>
+                                <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-envelope mr-2"></i>Email Support</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Us -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Get In Touch</h3>
+                        <address class="not-italic space-y-2">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-400 text-text-DEFAULT"></i>
+                                <p class="text-text-lighter">123 Learning Hub Avenue<br />San Francisco, CA 94103</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-3 text-primary-400"></i>
+                                <a href="mailto:support@learnhub.com" class="text-text-lighter hover:text-accent-blue transition-colors">support@learnhub.com</a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone-alt mr-3 text-primary-400"></i>
+                                <a href="tel:+11234567890" class="text-text-lighter hover:text-accent-blue transition-colors">+1 (123) 456-7890</a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-3 text-primary-400"></i>
+                                <span class="text-text-lighter">Mon-Fri: 9AM - 6PM EST</span>
+                            </div>
+                        </address>
+                        <div class="flex space-x-4 mt-6">
+                            <a href="#" class="text-text-lighter hover:text-[#1877F2] transition-colors" title="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#1DA1F2] transition-colors" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#0077B5] transition-colors" title="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#E4405F] transition-colors" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#FF0000] transition-colors" title="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border-darker pt-8 flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center md:text-left mb-4 md:mb-0">
+                        <p class="text-text-lighter text-sm">&copy; 2025 LearnHub. All rights reserved.</p>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <label for="footerDarkToggle" class="relative inline-flex items-center cursor-pointer scale-75 sm:scale-90 md:scale-100 transition-transform duration-200" title="Toggle Dark Mode">
+                            <input type="checkbox" id="footerDarkToggle" class="sr-only peer" />
+                            <div
+                                class="w-12 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all border border-gray-700 peer-checked:bg-gray-900 flex items-center justify-between px-1"
+                            >
+                                <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                                </svg>
+                                <svg class="w-3.5 h-3.5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </label>
+                        <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Privacy Policy</a>
+                        <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Terms of Service</a>
+                        <a href="./404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Sign In -->
+        <div id="sign-in-modal" class="hidden fixed inset-0 bg-background-dark/75 bg-opacity-75 z-50 items-center justify-center transition-opacity duration-300 opacity-0" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md mx-4 p-8 rounded-xl shadow-2xl relative transform transition-transform duration-300 scale-100 dark:text-gray-100">
+                <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="text-3xl font-bold mb-2 text-center text-primary-dark">Sign in</h3>
+                <p class="text-center text-gray-600 dark:text-gray-400">Get access to more learning features</p>
+                <p class="text-center text-sm mb-4">Don't have an account? <button data-modal-switch="create-account" class="text-green-600 dark:text-green-400 hover:underline font-semibold cursor-pointer">Register</button></p>
+                <div class="flex justify-center space-x-3">
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#DB4437] transition-colors cursor-pointer"><i class="fa-brands fa-google"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1877F2] transition-colors cursor-pointer"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#E4405F] transition-colors cursor-pointer"><i class="fa-brands fa-instagram"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1DA1F2] transition-colors cursor-pointer"><i class="fa-brands fa-twitter"></i></button>
+                </div>
+                <div class="flex items-center w-full py-3">
+                    <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                    <span class="mx-4 text-sm font-medium text-background-light0 dark:text-gray-400"> or </span>
+                    <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                </div>
+                <form>
+                    <div class="mb-4">
+                        <input type="email" id="signin-email" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" placeholder="Email" />
+                    </div>
+                    <div class="mb-2 relative">
+                        <input type="password" id="signin-password" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" placeholder="Password" />
+                        <button type="button" class="absolute top-1/2 -translate-y-1/2 right-3 text-background-light0 dark:text-gray-400"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <p class="text-right text-sm mb-6">
+                        <button type="button" data-modal-switch="reset-password" class="text-red-600 dark:text-red-400 hover:underline cursor-pointer">Forgot your password?</button>
+                    </p>
+                    <button type="submit" class="w-full bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 cursor-pointer shadow hover:shadow-md">Sign In</button>
+                </form>
+            </div>
+        </div>
+        <!-- Register -->
+        <div id="create-account-modal" class="hidden fixed inset-0 bg-background-dark/75 z-50 items-center justify-center p-4 transition-opacity duration-300 opacity-0 overflow-y-auto" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md rounded-2xl shadow-2xl relative transform transition-all duration-300 m-4 dark:text-gray-100">
+                <div class="p-8 max-h-[80vh] overflow-y-auto scrollbar-hide">
+                    <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl"><i class="fa-solid fa-xmark"></i></button>
+                    <h3 class="text-3xl font-bold mb-2 text-center text-green-600">Create your account</h3>
+                    <p class="text-center text-sm mb-4">Already have an account? <button data-modal-switch="sign-in" class="text-primary-dark dark:text-primary-light hover:underline font-semibold cursor-pointer">Sign In</button></p>
+                    <div class="flex justify-center space-x-3">
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#DB4437] transition-colors cursor-pointer"><i class="fa-brands fa-google"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1877F2] transition-colors cursor-pointer"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#E4405F] transition-colors cursor-pointer"><i class="fa-brands fa-instagram"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1DA1F2] transition-colors cursor-pointer"><i class="fa-brands fa-twitter"></i></button>
+                    </div>
+                    <div class="flex items-center w-full py-3">
+                        <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                        <span class="mx-4 text-sm font-medium text-background-light0 dark:text-gray-400"> or </span>
+                        <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                    </div>
+                    <form>
+                        <div class="mb-4">
+                            <input type="email" placeholder="Email" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="First Name" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="Last Name" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4 relative">
+                            <input type="password" placeholder="Password" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                            <button type="button" class="absolute top-1/2 -translate-y-1/2 right-3 text-background-light0 dark:text-gray-400"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="email-updates" checked class="h-4 w-4 text-primary-dark border-border-DEFAULT rounded focus:ring-accent-blue dark:bg-gray-600 dark:border-background-light0 cursor-pointer" />
+                            <label for="email-updates" class="ml-2 block text-sm cursor-pointer">Email me with news and updates</label>
+                        </div>
+                        <p class="text-xs mb-4 text-gray-600 dark:text-gray-400">
+                            By signing up you agree to our
+                            <a href="#" class="text-primary-dark dark:text-primary-light hover:underline font-medium">Terms of Service</a> and
+                            <a href="#" class="text-primary-dark dark:text-primary-light hover:underline">Privacy Policy</a>
+                        </p>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 cursor-pointer">Create account</button>
+                        <p class="text-xs mt-4 text-center text-background-light0 dark:text-gray-400">
+                            This site is protected by reCAPTCHA and the Google
+                            <a href="#" class="text-accent-blue dark:text-primary-light hover:underline">Privacy Policy</a> and <a href="#" class="text-accent-blue dark:text-primary-light hover:underline">Terms of Service</a> apply.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Reset Password -->
+        <div id="reset-password-modal" class="hidden fixed inset-0 bg-background-dark/75 bg-opacity-75 z-50 items-center justify-center transition-opacity duration-300 opacity-0" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md mx-4 p-8 rounded-xl shadow-2xl relative transform transition-transform duration-300 scale-100 dark:text-gray-100">
+                <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl"><i class="fa-solid fa-xmark"></i></button>
+                <div class="text-center mb-6">
+                    <div class="inline-block p-3 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 mb-4">
+                        <i class="fa-solid fa-envelope fa-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2 text-green-600">Reset your password</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">If the account exists, we will email you instructions to reset the password.</p>
+                </div>
+                <form>
+                    <div class="mb-6">
+                        <input type="email" placeholder="Enter your email address" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-red focus:border-accent-red" />
+                    </div>
+                    <button type="submit" class="w-full bg-linear-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 shadow hover:shadow-md">Send reset link</button>
+                    <p class="text-center text-sm mt-4">Return to <button type="button" data-modal-switch="sign-in" class="text-primary-dark dark:text-primary-light hover:underline font-medium">Sign In</button></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="../js/main.js"></script>
+        <script src="../js/doc.js"></script>
+    </body>
+</html>

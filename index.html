@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LearnHub - Educational Dashboard</title>
+        <meta name="description" content="Professional documentation and learning dashboard template" />
+        <link rel="stylesheet" href="./output.css" />
+        <link rel="stylesheet" href="./styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    </head>
+    <body class="bg-linear-to-br from-background-light to-blue-50 dark:from-background-dark dark:to-gray-800 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 bg-text-DEFAULT/95 dark:bg-background-dark/95 backdrop-blur-sm shadow z-50">
+            <div class="lg:mx-5 px-2 lg:px-4 py-1.5 lg:py-3 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden" id="mobileMenuBtn"><i class="fa-solid fa-bars text-black dark:text-white"></i></button>
+                    <a href="./index.html" class="text-2xl font-bold"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-background-dark dark:text-text-DEFAULT">Hub</span></a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="./index.html" class="text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Home</a>
+                    <a href="./pages/doc.html" class="text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Documentation</a>
+                    <a href="#features" class="text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Features</a>
+                    <a href="#courses" class="text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Courses</a>
+                    <a href="#quizzes" class="text-gray-800 dark:text-border-DEFAULT hover:text-primary-dark dark:hover:text-primary-light transition-colors font-medium">Quizzes</a>
+                </nav>
+
+                <!-- Right Side Icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Icon -->
+                    <div class="flex items-center rounded-full bg-text-DEFAULT pl-3 outline-1 -outline-offset-1 outline-border-DEFAULT has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-to-indigo">
+                        <input type="text" name="price" placeholder="Search..." class="block w-20 md:w-32 lg:w-40 py-1 md:py-1.5 pr-1.5 lg:pr-3 pl-1 text-base text-background-dark placeholder:text-gray-800 focus:outline-none sm:text-sm/6" />
+                        <div class="pe-3">
+                            <i class="fa-solid fa-magnifying-glass" style="color: rgb(90, 90, 90)"></i>
+                        </div>
+                    </div>
+
+                    <!-- User / Sign In-->
+                    <button
+                        id="open-sign-in-modal-desktop"
+                        class="hidden md:flex bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-semibold py-2.5 px-6 rounded-full transition-all duration-300 text-sm shadow-sm hover:shadow cursor-pointer"
+                    >
+                        Sign In
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <!-- Offcanvas Overlay -->
+                <div id="offcanvasOverlay" class="offcanvas-overlay"></div>
+
+                <!-- Offcanvas Menu -->
+                <div id="offcanvasMenu" class="offcanvas-menu md:hidden bg-linear-to-br from-background-light to-blue-50 dark:from-background-dark dark:to-gray-800 text-gray-800 dark:text-gray-100">
+                    <div class="offcanvas-header flex items-center justify-between text-gray-800 dark:text-gray-100">
+                        <a href="./index.html" class="text-2xl font-bold"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-background-dark dark:text-text-DEFAULT">Hub</span></a>
+                        <button id="closeOffcanvas">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="offcanvas-body text-gray-800 dark:text-gray-100">
+                        <ul class="space-y-4 mt-8">
+                            <li>
+                                <a href="./index.html" class="flex items-center px-4 py-3 text-border-darker dark:text-border-DEFAULT hover:bg-gray-100 dark:hover:bg-border-darker rounded transition-colors"><i class="fas fa-home w-5 mr-3 text-center text-amber-700"></i> Home</a>
+                            </li>
+                            <li>
+                                <a href="./pages/doc.html" class="flex items-center px-4 py-3 text-border-darker dark:text-border-DEFAULT hover:bg-gray-100 dark:hover:bg-border-darker rounded transition-colors"><i class="fas fa-book w-5 mr-3 text-center text-amber-300"></i> Documentation</a>
+                            </li>
+                            <li>
+                                <a href="#features" class="flex items-center px-4 py-3 text-border-darker dark:text-border-DEFAULT hover:bg-gray-100 dark:hover:bg-border-darker rounded transition-colors"><i class="fas fa-star w-5 mr-3 text-center text-yellow-300"></i> Features</a>
+                            </li>
+                            <li>
+                                <a href="#courses" class="flex items-center px-4 py-3 text-border-darker dark:text-border-DEFAULT hover:bg-gray-100 dark:hover:bg-border-darker rounded transition-colors"><i class="fas fa-graduation-cap w-5 mr-3 text-center text-blue-400"></i> Courses</a>
+                            </li>
+                            <li>
+                                <a href="#quizzes" class="flex items-center px-4 py-3 text-border-darker dark:text-border-DEFAULT hover:bg-gray-100 dark:hover:bg-border-darker rounded transition-colors"><i class="fas fa-tasks w-5 mr-3 text-center text-red-500"></i> Quizzes</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Login and Sign Up -->
+                    <div class="text-center mt-5">
+                        <button id="open-sign-in-modal-mobile" class="bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-semibold py-2 w-[80%] mx-auto rounded-full transition duration-300 text-sm">Sign In</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="grow pt-20">
+            <!-- Hero Section -->
+            <section class="py-20 md:py-28 bg-linear-to-br from-background-light via-text-DEFAULT to-blue-50 dark:from-background-dark dark:via-gray-800 dark:to-background-dark relative overflow-hidden">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-background-dark dark:text-text-DEFAULT mb-6" data-aos="zoom-in" data-aos-duration="1000">Empower Your Learning Journey</h1>
+                    <p class="text-xl text-border-darker dark:text-border-DEFAULT mb-10 max-w-3xl mx-auto">
+                        Discover a world of knowledge with our comprehensive learning platform, featuring expert-curated content, interactive lessons, and skill assessment tools to help you achieve academic and professional excellence.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="./pages/doc.html" class="btn bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT rounded-full px-8 py-1 md:py-3 text-lg font-semibold" data-aos="slide-right" data-aos-duration="1000"> Get Started </a>
+                        <div
+                            class="flex justify-between items-center rounded-full bg-text-DEFAULT pl-3 outline-1 -outline-offset-1 outline-border-DEFAULT has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-to-indigo"
+                            data-aos="slide-left"
+                            data-aos-duration="1000"
+                        >
+                            <input type="text" name="price" placeholder="Search..." class="block w-40 md:w-48 lg:w-60 py-2 md:py-3 pr-1.5 lg:pr-3 pl-1 text-base text-background-dark placeholder:text-gray-800 focus:outline-none sm:text-sm/6" />
+                            <div class="pe-5">
+                                <i class="fa-solid fa-magnifying-glass" style="color: rgb(50, 50, 50)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advice Section -->
+            <section class="py-12 bg-text-DEFAULT dark:bg-gray-800">
+                <div class="container mx-auto px-4" data-aos="zoom-in-up" data-aos-duration="1000">
+                    <div class="max-w-4xl mx-auto bg-text-DEFAULT dark:bg-gray-800 rounded-xl shadow-lg p-1 border border-border-light dark:border-gray-600">
+                        <div class="text-center bg-text-DEFAULT dark:bg-border-darker rounded-lg overflow-hidden text-sm md:text-xl py-5">Start now. The future doesn't prepare itself, it is created by the determination you sow today. ✨</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="py-16 bg-background-light dark:bg-background-dark">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-12" data-aos="zoom-in-up" data-aos-duration="1000">Why Choose Our Learning Platform?</h2>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Feature 1 -->
+                        <div data-aos="zoom-in-up" data-aos-duration="1000" class="bg-text-DEFAULT/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow overflow-hidden border border-border-light dark:border-border-darker/50 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                            <div class="p-6">
+                                <div class="w-14 h-14 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30 rounded-xl flex items-center justify-center mb-4 shadow-sm border border-border-light dark:border-border-darker/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-dark dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Expert-Curated Content</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Access meticulously crafted learning materials developed by industry experts and academic professionals.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div
+                            data-aos="zoom-in-up"
+                            data-aos-duration="1000"
+                            class="bg-text-DEFAULT/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow overflow-hidden border border-border-light dark:border-border-darker/50 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+                            style="animation-delay: 0.2s"
+                        >
+                            <div class="p-6">
+                                <div class="w-14 h-14 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30 rounded-xl flex items-center justify-center mb-4 shadow-sm border border-border-light dark:border-border-darker/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-dark dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Interactive Learning Experience</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Immerse yourself in engaging, hands-on exercises and real-world applications that reinforce learning.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div
+                            data-aos="zoom-in-up"
+                            data-aos-duration="1000"
+                            class="bg-text-DEFAULT/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow overflow-hidden border border-border-light dark:border-border-darker/50 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+                            style="animation-delay: 0.4s"
+                        >
+                            <div class="p-6">
+                                <div class="w-14 h-14 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30 rounded-xl flex items-center justify-center mb-4 shadow-sm border border-border-light dark:border-border-darker/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-dark dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Comprehensive Assessment Tools</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Track your progress with our advanced assessment system, featuring quizzes, practical assignments, and performance analytics.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div
+                            data-aos="zoom-in-up"
+                            data-aos-duration="1000"
+                            class="bg-text-DEFAULT/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow overflow-hidden border border-border-light dark:border-border-darker/50 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+                            style="animation-delay: 0.6s"
+                        >
+                            <div class="p-6">
+                                <div class="w-14 h-14 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30 rounded-xl flex items-center justify-center mb-4 shadow-sm border border-border-light dark:border-border-darker/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-dark dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Progress Tracking</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Track your learning progress and see how far you've come with our intuitive progress tracking system.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advice Section -->
+            <section class="py-12 bg-text-DEFAULT dark:bg-gray-800">
+                <div class="container mx-auto px-4" data-aos="zoom-in-up" data-aos-duration="1000">
+                    <div class="max-w-4xl mx-auto bg-text-DEFAULT dark:bg-gray-800 rounded-xl shadow-lg p-1 border border-border-light dark:border-gray-600">
+                        <div class="text-center bg-text-DEFAULT dark:bg-border-darker rounded-lg overflow-hidden text-sm md:text-xl py-5">Take the first step towards unlocking your potential. Let's create a brighter future together! 🌟</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section id="courses" class="py-12 md:py-16 lg:py-20 bg-background-light dark:bg-background-dark">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0 md:pr-8 lg:pr-12" data-aos="zoom-in-up" data-aos-duration="1000">
+                            <div class="flex flex-col h-full max-w-md mx-auto md:mx-0">
+                                <div class="space-y-2 sm:space-y-3 lg:space-y-4 mb-6 sm:mb-8 md:mb-10">
+                                    <h2 class="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-green-700">Data Science</h2>
+                                    <h3 class="text-base sm:text-lg text-gray-600 dark:text-border-DEFAULT">Master the art of extracting insights from complex datasets using Python, R, and advanced analytics techniques.</h3>
+                                </div>
+                                <div class="mt-auto">
+                                    <a
+                                        href="./pages/doc.html?section=1&topic=1"
+                                        class="inline-block bg-linear-to-r from-green-600 to-green-800 hover:from-green-800 hover:to-green-900 text-text-DEFAULT font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-6 sm:px-8 md:px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow"
+                                    >
+                                        Start Learning Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex justify-center items-center">
+                            <div class="bg-border-light dark:bg-border-darker rounded-xl overflow-hidden max-w-3xs md:max-w-sm inline-flex" style="filter: drop-shadow(0 0 10px rgb(150, 255, 150))" data-aos="zoom-in-up" data-aos-duration="1000">
+                                <img src="./assets/images/Data Science.jpg" alt="Data Science Illustration" class="object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-5 bg-text-DEFAULT dark:bg-gray-800"></section>
+            <section class="py-12 md:py-16 lg:py-20 bg-background-light dark:bg-background-dark">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0 md:pr-8 lg:pr-12" data-aos="zoom-in-up" data-aos-duration="1000">
+                            <div class="flex flex-col h-full max-w-md mx-auto md:mx-0">
+                                <div class="space-y-2 sm:space-y-3 lg:space-y-4 mb-6 sm:mb-8 md:mb-10">
+                                    <h2 class="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-red-700">Cybersecurity</h2>
+                                    <h3 class="text-base sm:text-lg text-gray-600 dark:text-border-DEFAULT">Develop expertise in protecting systems and networks from digital attacks through ethical hacking and security best practices.</h3>
+                                </div>
+                                <div class="mt-auto">
+                                    <a
+                                        href="./pages/doc.html?section=2&topic=1"
+                                        class="inline-block bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-text-DEFAULT font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-6 sm:px-8 md:px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow"
+                                    >
+                                        Start Learning Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex justify-center items-center">
+                            <div class="bg-border-light dark:bg-border-darker rounded-xl overflow-hidden max-w-3xs md:max-w-sm inline-flex" style="filter: drop-shadow(0 0 10px rgb(255, 100, 100))" data-aos="zoom-in-up" data-aos-duration="1000">
+                                <img src="./assets/images/Cybersecurity.jpg" alt="Cybersecurity Illustration" class="object-contain" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-5 bg-text-DEFAULT dark:bg-gray-800"></section>
+            <section class="py-12 md:py-16 lg:py-20 bg-background-light dark:bg-background-dark">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0 md:pr-8 lg:pr-12" data-aos="zoom-in-up" data-aos-duration="1000">
+                            <div class="flex flex-col h-full max-w-md mx-auto md:mx-0">
+                                <div class="space-y-2 sm:space-y-3 lg:space-y-4 mb-6 sm:mb-8 md:mb-10">
+                                    <h2 class="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-cyan-700">Cloud Computing</h2>
+                                    <h3 class="text-base sm:text-lg text-gray-600 dark:text-border-DEFAULT">Learn to design, deploy, and manage applications on leading cloud platforms like AWS, Azure, and Google Cloud.</h3>
+                                </div>
+                                <div class="mt-auto">
+                                    <a
+                                        href="./pages/doc.html?section=3&topic=1"
+                                        class="inline-block bg-linear-to-r from-cyan-600 to-cyan-800 hover:from-cyan-800 hover:to-cyan-900 text-text-DEFAULT font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-6 sm:px-8 md:px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow"
+                                    >
+                                        Start Learning Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex justify-center items-center">
+                            <div class="bg-border-light dark:bg-border-darker rounded-xl overflow-hidden max-w-3xs md:max-w-sm inline-flex" style="filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5))" data-aos="zoom-in-up" data-aos-duration="1000">
+                                <img src="./assets/images/Cloud Computing.jpg" alt="Cloud Computing Illustration" class="object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quizzes Section -->
+            <section id="quizzes" class="py-16 bg-text-DEFAULT dark:bg-gray-800">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-text-DEFAULT mb-4" data-aos="zoom-in-up" data-aos-duration="1000">Quizzes</h2>
+                        <p class="text-lg sm:text-xl text-gray-600 dark:text-border-DEFAULT mb-8 sm:mb-12" data-aos="zoom-in-up" data-aos-duration="1000">Test your skills!</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                            <a
+                                data-aos="zoom-in-up"
+                                data-aos-duration="1000"
+                                href="./pages/doc.html?section=1&topic=11&quiz=true"
+                                class="bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-text-DEFAULT font-medium py-3 px-4 sm:py-4 sm:px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow hover:shadow-md"
+                            >
+                                <i class="fas fa-chart-line mr-2"></i>Data Science Quiz
+                            </a>
+                            <a
+                                data-aos="zoom-in-up"
+                                data-aos-duration="1000"
+                                href="./pages/doc.html?section=2&topic=11&quiz=true"
+                                class="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-text-DEFAULT font-medium py-3 px-4 sm:py-4 sm:px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow hover:shadow-md"
+                            >
+                                <i class="fas fa-shield-alt mr-2"></i>Cybersecurity Quiz
+                            </a>
+                            <a
+                                data-aos="zoom-in-up"
+                                data-aos-duration="1000"
+                                href="./pages/doc.html?section=3&topic=11&quiz=true"
+                                class="bg-linear-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-text-DEFAULT font-medium py-3 px-4 sm:py-4 sm:px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow hover:shadow-md"
+                            >
+                                <i class="fas fa-cloud mr-2"></i>Cloud Computing Quiz
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-linear-to-b from-gray-800 to-background-dark text-border-light pt-16 pb-8">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <!-- Logo and Description -->
+                    <div class="col-span-1">
+                        <div class="text-2xl font-bold cursor-default"><span class="text-primary-dark dark:text-accent-blue">Learn</span><span class="text-text-DEFAULT dark:text-text-DEFAULT">Hub</span></div>
+                        <p class="text-text-lighter mb-4">Your gateway to mastering in-demand tech skills through expert-led courses and hands-on learning.</p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="./index.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-home mr-2"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="./pages/doc.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-book mr-2"></i>Documentation</a>
+                            </li>
+                            <li>
+                                <a href="#courses" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-star mr-2"></i>courses</a>
+                            </li>
+                            <li>
+                                <a href="#quizzes" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-tasks mr-2"></i>Quizzes</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Customer Support -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Support & Resources</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="./pages/about.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fa-regular fa-address-card mr-2"></i>About</a>
+                            </li>
+                            <li>
+                                <a href="./pages/contact.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fa-solid fa-file-signature mr-2"></i>Contact</a>
+                            </li>
+                            <li>
+                                <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-question-circle mr-2"></i>Help Center</a>
+                            </li>
+                            <li>
+                                <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-comments mr-2"></i>24/7 Live Chat</a>
+                            </li>
+                            <li>
+                                <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors"><i class="fas fa-envelope mr-2"></i>Email Support</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Us -->
+                    <div>
+                        <h3 class="text-text-DEFAULT font-semibold text-lg mb-4">Get In Touch</h3>
+                        <address class="not-italic space-y-2">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-400 text-text-DEFAULT"></i>
+                                <p class="text-text-lighter">123 Learning Hub Avenue<br />San Francisco, CA 94103</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-3 text-primary-400"></i>
+                                <a href="mailto:support@learnhub.com" class="text-text-lighter hover:text-accent-blue transition-colors">support@learnhub.com</a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone-alt mr-3 text-primary-400"></i>
+                                <a href="tel:+11234567890" class="text-text-lighter hover:text-accent-blue transition-colors">+1 (123) 456-7890</a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-3 text-primary-400"></i>
+                                <span class="text-text-lighter">Mon-Fri: 9AM - 6PM EST</span>
+                            </div>
+                        </address>
+                        <div class="flex space-x-4 mt-6">
+                            <a href="#" class="text-text-lighter hover:text-[#1877F2] transition-colors" title="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#1DA1F2] transition-colors" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#0077B5] transition-colors" title="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#E4405F] transition-colors" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="text-text-lighter hover:text-[#FF0000] transition-colors" title="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-border-darker pt-8 flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center md:text-left mb-4 md:mb-0">
+                        <p class="text-text-lighter text-sm">&copy; 2025 LearnHub. All rights reserved.</p>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <label for="footerDarkToggle" class="relative inline-flex items-center cursor-pointer scale-75 sm:scale-90 md:scale-100 transition-transform duration-200" title="Toggle Dark Mode">
+                            <input type="checkbox" id="footerDarkToggle" class="sr-only peer" />
+                            <div
+                                class="w-12 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all border border-gray-700 peer-checked:bg-gray-900 flex items-center justify-between px-1"
+                            >
+                                <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                                </svg>
+                                <svg class="w-3.5 h-3.5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </label>
+                        <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Privacy Policy</a>
+                        <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Terms of Service</a>
+                        <a href="./pages/404.html" class="text-text-lighter hover:text-accent-blue transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Sign In -->
+        <div id="sign-in-modal" class="hidden fixed inset-0 bg-background-dark/75 bg-opacity-75 z-50 items-center justify-center transition-opacity duration-300 opacity-0" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md mx-4 p-8 rounded-xl shadow-2xl relative transform transition-transform duration-300 scale-100 dark:text-gray-100">
+                <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="text-3xl font-bold mb-2 text-center text-primary-dark">Sign in</h3>
+                <p class="text-center text-gray-600 dark:text-gray-400">Get access to more learning features</p>
+                <p class="text-center text-sm mb-4">Don't have an account? <button data-modal-switch="create-account" class="text-green-600 dark:text-green-400 hover:underline font-semibold cursor-pointer">Register</button></p>
+                <div class="flex justify-center space-x-3">
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#DB4437] transition-colors cursor-pointer"><i class="fa-brands fa-google"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1877F2] transition-colors cursor-pointer"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#E4405F] transition-colors cursor-pointer"><i class="fa-brands fa-instagram"></i></button>
+                    <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1DA1F2] transition-colors cursor-pointer"><i class="fa-brands fa-twitter"></i></button>
+                </div>
+                <div class="flex items-center w-full py-3">
+                    <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                    <span class="mx-4 text-sm font-medium text-background-light0 dark:text-gray-400"> or </span>
+                    <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                </div>
+                <form>
+                    <div class="mb-4">
+                        <input type="email" id="signin-email" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" placeholder="Email" />
+                    </div>
+                    <div class="mb-2 relative">
+                        <input type="password" id="signin-password" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" placeholder="Password" />
+                        <button type="button" class="absolute top-1/2 -translate-y-1/2 right-3 text-background-light0 dark:text-gray-400"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <p class="text-right text-sm mb-6">
+                        <button type="button" data-modal-switch="reset-password" class="text-red-600 dark:text-red-400 hover:underline cursor-pointer">Forgot your password?</button>
+                    </p>
+                    <button type="submit" class="w-full bg-linear-to-r from-primary-dark to-blue-800 hover:from-primary-darker hover:to-blue-900 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 cursor-pointer shadow hover:shadow-md">Sign In</button>
+                </form>
+            </div>
+        </div>
+        <!-- Register -->
+        <div id="create-account-modal" class="hidden fixed inset-0 bg-background-dark/75 z-50 items-center justify-center p-4 transition-opacity duration-300 opacity-0 overflow-y-auto" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md rounded-2xl shadow-2xl relative transform transition-all duration-300 m-4 dark:text-gray-100">
+                <div class="p-8 max-h-[80vh] overflow-y-auto scrollbar-hide">
+                    <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl"><i class="fa-solid fa-xmark"></i></button>
+                    <h3 class="text-3xl font-bold mb-2 text-center text-green-600">Create your account</h3>
+                    <p class="text-center text-sm mb-4">Already have an account? <button data-modal-switch="sign-in" class="text-primary-dark dark:text-primary-light hover:underline font-semibold cursor-pointer">Sign In</button></p>
+                    <div class="flex justify-center space-x-3">
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#DB4437] transition-colors cursor-pointer"><i class="fa-brands fa-google"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1877F2] transition-colors cursor-pointer"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#E4405F] transition-colors cursor-pointer"><i class="fa-brands fa-instagram"></i></button>
+                        <button class="w-12 h-12 border border-black dark:border-text-DEFAULT rounded-lg flex items-center justify-center hover:bg-gray-100 dark:hover:bg-border-darker hover:text-[#1DA1F2] transition-colors cursor-pointer"><i class="fa-brands fa-twitter"></i></button>
+                    </div>
+                    <div class="flex items-center w-full py-3">
+                        <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                        <span class="mx-4 text-sm font-medium text-background-light0 dark:text-gray-400"> or </span>
+                        <div class="grow border-t border-border-DEFAULT dark:border-gray-600"></div>
+                    </div>
+                    <form>
+                        <div class="mb-4">
+                            <input type="email" placeholder="Email" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="First Name" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="Last Name" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                        </div>
+                        <div class="mb-4 relative">
+                            <input type="password" placeholder="Password" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-blue focus:border-accent-blue" />
+                            <button type="button" class="absolute top-1/2 -translate-y-1/2 right-3 text-background-light0 dark:text-gray-400"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="email-updates" checked class="h-4 w-4 text-primary-dark border-border-DEFAULT rounded focus:ring-accent-blue dark:bg-gray-600 dark:border-background-light0 cursor-pointer" />
+                            <label for="email-updates" class="ml-2 block text-sm cursor-pointer">Email me with news and updates</label>
+                        </div>
+                        <p class="text-xs mb-4 text-gray-600 dark:text-gray-400">
+                            By signing up you agree to our
+                            <a href="#" class="text-primary-dark dark:text-primary-light hover:underline font-medium">Terms of Service</a> and
+                            <a href="#" class="text-primary-dark dark:text-primary-light hover:underline">Privacy Policy</a>
+                        </p>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 cursor-pointer">Create account</button>
+                        <p class="text-xs mt-4 text-center text-background-light0 dark:text-gray-400">
+                            This site is protected by reCAPTCHA and the Google
+                            <a href="#" class="text-accent-blue dark:text-primary-light hover:underline">Privacy Policy</a> and <a href="#" class="text-accent-blue dark:text-primary-light hover:underline">Terms of Service</a> apply.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Reset Password -->
+        <div id="reset-password-modal" class="hidden fixed inset-0 bg-background-dark/75 bg-opacity-75 z-50 items-center justify-center transition-opacity duration-300 opacity-0" dir="ltr">
+            <div class="bg-text-DEFAULT dark:bg-gray-800 w-full max-w-md mx-4 p-8 rounded-xl shadow-2xl relative transform transition-transform duration-300 scale-100 dark:text-gray-100">
+                <button data-modal-close class="absolute top-4 right-4 text-background-light0 dark:text-border-DEFAULT hover:text-background-dark dark:hover:text-text-DEFAULT text-2xl"><i class="fa-solid fa-xmark"></i></button>
+                <div class="text-center mb-6">
+                    <div class="inline-block p-3 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 mb-4">
+                        <i class="fa-solid fa-envelope fa-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2 text-green-600">Reset your password</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">If the account exists, we will email you instructions to reset the password.</p>
+                </div>
+                <form>
+                    <div class="mb-6">
+                        <input type="email" placeholder="Enter your email address" class="w-full p-3 border border-border-DEFAULT dark:border-gray-600 rounded-lg bg-background-light dark:bg-border-darker focus:ring-accent-red focus:border-accent-red" />
+                    </div>
+                    <button type="submit" class="w-full bg-linear-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-text-DEFAULT font-bold py-3 rounded-lg transition duration-300 shadow hover:shadow-md">Send reset link</button>
+                    <p class="text-center text-sm mt-4">Return to <button type="button" data-modal-switch="sign-in" class="text-primary-dark dark:text-primary-light hover:underline font-medium">Sign In</button></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="./js/main.js"></script>
+    </body>
+</html>
