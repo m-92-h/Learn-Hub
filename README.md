@@ -2,7 +2,9 @@
 
 LearnHub is a professional, modern, and fully responsive educational dashboard template designed for academic and professional excellence. It features expert-curated content, interactive lessons, and skill assessment tools.
 
-![LearnHub Preview](assets/preview.png)
+<p align="center">
+  <img src="assets/preview.png" alt="LearnHub Preview">
+</p>
 
 ## ✨ Key Features
 
